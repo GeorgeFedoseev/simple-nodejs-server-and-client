@@ -1,0 +1,14 @@
+{
+  "name": "Socket_io_server_test",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "keywords": [],
+  "author": "ag_dubs",
+  "license": "ISC",
+  "dependencies": {
+    "serve-static": "^1.11.2",
+    "socket.io": "^1.7.3"
+  }
+}

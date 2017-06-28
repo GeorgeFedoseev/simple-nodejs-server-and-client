@@ -1,0 +1,86 @@
+
+<html>
+
+<head>
+	<script src="hammer.js"></script>
+	<script src="socket.io.js"></script>
+
+
+	
+
+	<style>
+		#panArea {
+			width: 500px;
+			height: 500px;
+			background: orange;
+		}
+	</style>
+</head>
+
+
+<body>
+	<div id="panArea"></div>	
+</body>
+
+
+
+<script> 
+
+
+var socket = io("http://pingpong1.hopto.org:3000");
+	socket.on('connect', function(){
+		console.log("Connected to server!");
+	});
+
+	socket.on('event', function(data){});
+	socket.on('disconnect', function(){});
+
+
+
+
+var myElement = document.getElementById('panArea');
+
+var hammertime = new Hammer(myElement);
+
+var lastY = 0;
+
+hammertime.on('tap', function(ev){
+	console.log("pan")
+});
+
+hammertime.on('pan hammer.input', function(ev) {
+
+	//console.log(ev)
+
+	if(ev.isFirst){
+		console.log("First!")		
+		lastY = ev.deltaY;
+	}
+
+	var delta = ev.deltaY - lastY;
+
+	if(delta != 0){
+		console.log (delta);
+
+
+		socket.emit ("inputDelta", -delta);	
+	}
+	
+	
+
+
+	lastY = ev.deltaY;;
+});
+	
+
+</script>
+
+</html>
+
+
+
+
+
+
+
+
